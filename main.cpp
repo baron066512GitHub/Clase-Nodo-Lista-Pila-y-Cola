@@ -7,7 +7,7 @@ int main() {
     Nodo<int> nodo2(100, &nodo1);
 
     std::cout << "Info nodo2: " << nodo2.getInfo() << "\n";
-    std::cout << "Next nodo2: " << nodo2.getNext() << "\n";
+    std::cout << "Next nodo2: " << nodo2.getNext()  << "\n";
 
     return 0;
 }
