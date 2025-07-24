@@ -3,7 +3,7 @@
 template <class Element>
 Nodo<Element>::Nodo(){
     this->next = NULL;
-    this->info = NULL;
+    this->info = Element();
 
 }
 
