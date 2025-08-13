@@ -3,6 +3,8 @@
 #include <iostream>
 #include "nodo.h"
 
+using namespace std;
+
 
 template <class Element>
 class Lista{
@@ -51,6 +53,9 @@ class Lista{
         Lista<Element> compacta();
         void insertarPrimero(Element element);
         void insertarUltimo(Element element);
+        void reorderOddsAndEvens();
+        void rightShift(int shift);
+        
 
         // OPERADORES
         
@@ -737,6 +742,65 @@ void Lista<Element>::insertarUltimo(Element element) {
         this->tail = newNodo;
     }
     this->length++;
+}
+
+template <class Element>
+void Lista<Element>::reorderOddsAndEvens(){
+    Nodo<int> *act, *par, *impar, *primerPar;
+    int i;
+
+    act = this->head;
+    impar = this->head;
+    par = NULL;
+    i = 2;
+
+    while(act != NULL){
+        act = act->getNext();
+        if(i%2 == 0){
+            if(par == NULL){
+                par = act;
+                primerPar = act;
+            }else{
+                par->setNext(act);
+                par = par->getNext();
+            }
+        }else{
+            impar->setNext(act);
+            impar = impar->getNext();
+        }
+        i++;
+    }
+
+    impar->setNext(primerPar);
+
+    if(this->length % 2 == 0){
+        par->setNext(NULL);
+        this->tail = par;
+    }
+}
+
+template <class Element>
+void Lista<Element>::rightShift(int shift){
+    int realShift, movements, i;
+    Nodo<Element> *first, *act;
+    
+    shift++;
+
+    realShift = shift % this->length;
+    movements = this->length - realShift;
+    first = this->head;
+    act = this->head;
+    i = 0;
+
+    while(i < movements){
+        i++;
+        act = act->getNext();
+    }
+
+    this->head = act->getNext();
+    act->setNext(NULL);
+    this->tail->setNext(first);
+    this->tail = act;
 }
 
 #endif

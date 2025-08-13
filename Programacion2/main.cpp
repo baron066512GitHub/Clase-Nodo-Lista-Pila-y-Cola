@@ -4,24 +4,23 @@
 #include "lista.h"
 #include "pila.h"
 #include "cola.h"
+#include "extras.h"
+
+using namespace std;
 
 int main() {
     srand(time(0)); // Inicializa la semilla aleatoria ( por si necesitas números aleatorios)
-    // Crear una instancia de la lista
-    Cola<int> cola;
+    //cd /mnt/c/Users/windows/OneDrive/Desktop/Programacion2
+    Lista<Lista<string>> contenedor;
+    contenedor = leerListasVertical();
+    mostrarColumnas(contenedor);
 
-    cola.encolar(1);
-    cola.encolar(2);    
-    cola.encolar(3);
-    cola.encolar(4);    
-    cola.encolar(5);
+    Lista<string> nombres;
+    nombres = obtenerColumna(contenedor, 3); // Para la columna 1 (índice 0)
+    nombres.mostrar();
 
-    Cola<Cola<int>> colaDeColas;
-    colaDeColas.encolar(cola);
-    colaDeColas.encolar(cola);
-    colaDeColas.encolar(cola);
+    
 
-    colaDeColas.mostrar();
 
     return 0;
 }
